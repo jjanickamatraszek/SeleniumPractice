@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Default Suite" parallel="tests" thread-count="3">
+    <test name="SeleniumPractice">
+        <parameter name="browserType" value="CHROME"/>
+        <classes>
+            <class name="com.solvd.NewInSubMenuTests"/>
+        </classes>
+    </test> <!-- SeleniumPractice -->
+</suite> <!-- Default Suite -->
