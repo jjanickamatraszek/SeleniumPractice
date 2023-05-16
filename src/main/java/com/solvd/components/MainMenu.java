@@ -3,9 +3,7 @@ package com.solvd.components;
 import com.solvd.base.BasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class MainMenu extends BasePage {
 
@@ -17,8 +15,7 @@ public class MainMenu extends BasePage {
     }
 
     public NewInSubMenu hoverOverNewInCategory() {
-        Actions actions = new Actions(driver);
-        actions.moveToElement(newInCategory).build().perform();
+        hoverOver(newInCategory);
         return new NewInSubMenu(driver);
     }
 }

@@ -6,7 +6,6 @@ import com.solvd.components.MainMenu;
 import com.solvd.propertiesReader.ConfigReader;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 public class HomePage extends BasePage {
 
