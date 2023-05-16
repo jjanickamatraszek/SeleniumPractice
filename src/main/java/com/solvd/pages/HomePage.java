@@ -1,5 +1,6 @@
 package com.solvd.pages;
 
+import com.solvd.base.BasePage;
 import com.solvd.components.CookieDialog;
 import com.solvd.components.MainMenu;
 import com.solvd.propertiesReader.ConfigReader;
@@ -7,8 +8,7 @@ import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage {
-    private final WebDriver driver;
+public class HomePage extends BasePage {
 
     @Getter
     private final MainMenu mainMenu;
@@ -17,8 +17,7 @@ public class HomePage {
     private final CookieDialog cookieDialog;
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
         this.cookieDialog = new CookieDialog(driver);
         this.mainMenu = new MainMenu(driver);
     }
