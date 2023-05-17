@@ -1,12 +1,15 @@
 package com.solvd.components;
 
 import com.solvd.base.BasePage;
+import com.solvd.pages.NewInSubCatPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class NewInSubMenu extends BasePage {
 
@@ -39,8 +42,27 @@ public class NewInSubMenu extends BasePage {
     public long getNumberOfSubcategoriesWithoutTitle() {
         return subCategories
                 .stream()
-                .map(el -> el.findElement(By.cssSelector("div[class*='Text']")).getText())
+                .map(el -> getText(el.findElement(By.cssSelector("div[class*='Text']"))))
                 .filter(String::isBlank)
                 .count();
+    }
+
+    public List<String> getSubCategoriesTitles() {
+        return subCategories
+                .stream()
+                .map(el -> getText(el.findElement(By.cssSelector("div[class*='Text']"))))
+                .collect(Collectors.toList());
+    }
+
+    public NewInSubCatPage clickOnSubcategory(String title) {
+        WebElement subCategory = subCategories
+                .stream()
+                .filter(el -> getText(el.findElement(By.cssSelector("div[class*='Text']"))).equalsIgnoreCase(title))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("There's no subcategory with title '%s' in 'New In' category menu'".formatted(title)));
+
+        click(subCategory);
+        wait.until(ExpectedConditions.invisibilityOf(submenuContainer));
+        return new NewInSubCatPage(driver);
     }
 }

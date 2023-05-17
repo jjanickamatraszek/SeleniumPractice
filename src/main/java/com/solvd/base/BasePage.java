@@ -47,4 +47,10 @@ public abstract class BasePage {
         actions.moveToElement(element).build().perform();
         LOGGER.info("Hover over element %s".formatted(Utils.extractSelector(element)));
     }
+
+    public String getText(WebElement element) {
+        String text = element.getText().strip();
+        LOGGER.info("Get text of element %s. Text is '%s'".formatted(Utils.extractSelector(element), text));
+        return text;
+    }
 }
