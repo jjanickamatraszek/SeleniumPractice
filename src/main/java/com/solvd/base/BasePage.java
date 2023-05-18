@@ -37,6 +37,17 @@ public abstract class BasePage {
         return isVisible;
     }
 
+    public boolean isElementDisplayed(WebElement element) {
+        boolean isDisplayed = true;
+        if (element.isDisplayed()) {
+            LOGGER.info("Element is displayed %s".formatted(Utils.extractSelector(element)));
+        } else {
+            isDisplayed = false;
+            LOGGER.info("Element isn't displayed %s".formatted(Utils.extractSelector(element)));
+        }
+        return isDisplayed;
+    }
+
     public void click(WebElement element) {
         element.click();
         LOGGER.info("Click element %s".formatted(Utils.extractSelector(element)));

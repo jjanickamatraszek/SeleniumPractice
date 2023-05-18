@@ -1,4 +1,4 @@
-package com.solvd.base;
+package com.solvd.tests.base;
 
 import com.solvd.drivers.Browser;
 import com.solvd.drivers.DriverFactory;

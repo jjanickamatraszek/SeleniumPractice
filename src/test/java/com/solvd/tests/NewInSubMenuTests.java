@@ -1,10 +1,10 @@
-package com.solvd;
+package com.solvd.tests;
 
-import com.solvd.base.BaseTest;
 import com.solvd.components.MainMenu;
 import com.solvd.components.NewInSubMenu;
 import com.solvd.pages.HomePage;
 import com.solvd.pages.NewInSubCatPage;
+import com.solvd.tests.base.BaseTest;
 import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
