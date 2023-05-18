@@ -1,7 +1,7 @@
 package com.solvd.base;
 
 import com.solvd.utils.Utils;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.time.Duration;
 
 public abstract class BasePage {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
     protected final WebDriver driver;
     protected final WebDriverWait wait;
 
@@ -28,8 +28,10 @@ public abstract class BasePage {
         boolean isVisible = true;
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
-        } catch (NoSuchElementException e) {
+            LOGGER.info("Element is visible %s".formatted(Utils.extractSelector(element)));
+        } catch (TimeoutException e) {
             isVisible = false;
+            LOGGER.info("Element isn't visible %s".formatted(Utils.extractSelector(element)));
         }
         return isVisible;
     }
