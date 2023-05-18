@@ -11,10 +11,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.invoke.MethodHandles;
 import java.time.Duration;
 
 public abstract class BasePage {
-    protected static final Logger LOGGER = LoggerFactory.getLogger(BasePage.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     protected final WebDriver driver;
     protected final WebDriverWait wait;
 
