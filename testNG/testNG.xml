@@ -6,6 +6,7 @@
         <classes>
             <class name="com.solvd.tests.NewInSubMenuTests"/>
             <class name="com.solvd.tests.DisplayProductInfoTests"/>
+            <class name="com.solvd.tests.CategoryProductFiltersTests"/>
         </classes>
     </test> <!-- SeleniumPractice -->
 </suite> <!-- Default Suite -->

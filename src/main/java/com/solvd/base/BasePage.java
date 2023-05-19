@@ -64,4 +64,9 @@ public abstract class BasePage {
         LOGGER.info("Get text of element %s. Text is '%s'".formatted(Utils.extractSelector(element), text));
         return text;
     }
+
+    public void sendText(WebElement element, String text) {
+        element.sendKeys(text);
+        LOGGER.info("Send text %s to element %s".formatted(text, Utils.extractSelector(element)));
+    }
 }
