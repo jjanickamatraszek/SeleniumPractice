@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,8 +40,7 @@ public class CategoryProductFiltersTests extends BaseTest {
         NewInSubCatPage categoryPageSortedByPrice = categoryPage.getProductFilters()
                 .sortBy(SortOption.PRICE_ASC);
 
-        List<BigDecimal> actualProductsPricesSorted = categoryPageSortedByPrice.getProductFilters()
-                .sortBy(SortOption.PRICE_ASC)
+        List<BigDecimal> actualProductsPricesSorted = categoryPageSortedByPrice
                 .getProductsPricesAsNumbers();
 
         SoftAssert softAssert = new SoftAssert();
@@ -94,8 +94,8 @@ public class CategoryProductFiltersTests extends BaseTest {
                 .collect(Collectors.toList());
 
         int amountOfProductBeforeFiltering = productPricesSortedAsc.size();
-        BigDecimal priceFrom = productPricesSortedAsc.get(1);
-        BigDecimal priceTo = productPricesSortedAsc.get(productPricesSortedAsc.size() - 2);
+        BigDecimal priceFrom = productPricesSortedAsc.get(1).setScale(0, RoundingMode.CEILING);
+        BigDecimal priceTo = productPricesSortedAsc.get(productPricesSortedAsc.size() - 2).setScale(0, RoundingMode.FLOOR);
 
         NewInSubCatPage categoryPageFiltered = categoryPage
                 .getProductFilters()
