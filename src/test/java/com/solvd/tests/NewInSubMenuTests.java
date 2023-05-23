@@ -5,7 +5,6 @@ import com.solvd.components.NewInSubMenu;
 import com.solvd.pages.HomePage;
 import com.solvd.pages.NewInSubCatPage;
 import com.solvd.tests.base.BaseTest;
-import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -27,7 +26,6 @@ public class NewInSubMenuTests extends BaseTest {
     }
 
     @Test(description = "Display submenu of 'New In' menu category")
-    @MethodOwner(owner = "jjanickamatraszek")
     public void displaySubMenuTest() {
         int expectedNumberOfSubcategories = 4;
 
@@ -44,7 +42,6 @@ public class NewInSubMenuTests extends BaseTest {
     }
 
     @Test(description = "Go to subcategory page", dependsOnMethods = "displaySubMenuTest")
-    @MethodOwner(owner = "jjanickamatraszek")
     public void goToSubcategoryPageTest() {
         MainMenu mainMenu = homePage.getMainMenu();
         List<String> subCategoriesTitles = mainMenu.hoverOverNewInCategory().getSubCategoriesTitles();

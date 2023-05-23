@@ -3,7 +3,6 @@ package com.solvd.tests;
 import com.solvd.pages.HomePage;
 import com.solvd.pages.ProductPage;
 import com.solvd.tests.base.BaseTest;
-import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -38,7 +37,6 @@ public class DisplayProductInfoTests extends BaseTest {
     }
 
     @Test(description = "Display product page")
-    @MethodOwner(owner = "jjanickamatraszek")
     public void displayProductInfoTest() {
         SoftAssert soft = new SoftAssert();
         soft.assertEquals(productPage.getTitle(), productTitle, "Product title is different than expected");
@@ -55,7 +53,6 @@ public class DisplayProductInfoTests extends BaseTest {
     }
 
     @Test(description = "Expand and collapse description section")
-    @MethodOwner(owner = "jjanickamatraszek")
     public void expandAndCollapseDescTest() {
         ProductPage productPageWithCollapsedAllSections = productPage
                 .expandCollapseDescriptionSection();

@@ -4,7 +4,6 @@ import com.solvd.components.SortOption;
 import com.solvd.pages.NewInSubCatPage;
 import com.solvd.routes.Route;
 import com.solvd.tests.base.BaseTest;
-import com.zebrunner.carina.core.registrar.ownership.MethodOwner;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -29,7 +28,6 @@ public class CategoryProductFiltersTests extends BaseTest {
     }
 
     @Test(description = "Sort products by price asc")
-    @MethodOwner(owner = "jjanickamatraszek")
     public void sortProductsByPriceAscTest() {
         List<BigDecimal> expectedProductsPricesSorted = categoryPage
                 .getProductsPricesAsNumbers()
@@ -52,7 +50,6 @@ public class CategoryProductFiltersTests extends BaseTest {
     }
 
     @Test(description = "Sort products by default order")
-    @MethodOwner(owner = "jjanickamatraszek")
     public void sortProductsByDefaultOrderTest() {
         List<String> expectedProductsTitles = categoryPage.getProductsTitles();
 
@@ -85,7 +82,6 @@ public class CategoryProductFiltersTests extends BaseTest {
     }
 
     @Test(description = "Filter products by price range")
-    @MethodOwner(owner = "jjanickamatraszek")
     public void filterProductsByPriceRangeTest() {
         List<BigDecimal> productPricesSortedAsc = categoryPage
                 .getProductsPricesAsNumbers()
