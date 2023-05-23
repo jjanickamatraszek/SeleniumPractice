@@ -20,7 +20,7 @@ public class DisplayProductInfoTests extends BaseTest {
 
     @BeforeClass
     public void loadTestData(){
-        newInCategory = TestDataReader.getNewInCategory();
+        newInCategory = TestDataReader.getNewInCategories()[0];
         productTitle = TestDataReader.getNewInProductTitle();
     }
 

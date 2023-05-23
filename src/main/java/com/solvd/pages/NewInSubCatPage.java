@@ -2,6 +2,7 @@ package com.solvd.pages;
 
 import com.solvd.base.BasePage;
 import com.solvd.components.CookieDialog;
+import com.solvd.components.MainMenu;
 import com.solvd.components.ProductFilters;
 import com.solvd.components.SideBar;
 import com.solvd.propertiesReader.ConfigReader;
@@ -22,6 +23,9 @@ public class NewInSubCatPage extends BasePage {
     private WebElement titleLabel;
 
     @Getter
+    private final MainMenu mainMenu;
+
+    @Getter
     private SideBar sideBar;
 
     @FindBy(css = "#categoryProducts>article")
@@ -38,6 +42,7 @@ public class NewInSubCatPage extends BasePage {
         this.sideBar = new SideBar(driver);
         this.cookieDialog = new CookieDialog(driver);
         this.productFilters = new ProductFilters(driver);
+        this.mainMenu = new MainMenu(driver);
     }
 
     public NewInSubCatPage goToPage(String route) {

@@ -1,10 +1,10 @@
 package com.solvd.tests;
 
-import com.solvd.components.MainMenu;
 import com.solvd.components.NewInSubMenu;
 import com.solvd.pages.HomePage;
 import com.solvd.pages.NewInSubCatPage;
 import com.solvd.tests.base.BaseTest;
+import com.solvd.tests.dataProviders.DataProviders;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
@@ -12,7 +12,6 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.net.MalformedURLException;
-import java.util.List;
 
 public class NewInSubMenuTests extends BaseTest {
     private HomePage homePage;
@@ -41,19 +40,15 @@ public class NewInSubMenuTests extends BaseTest {
         soft.assertAll();
     }
 
-    @Test(description = "Go to subcategory page", dependsOnMethods = "displaySubMenuTest")
-    public void goToSubcategoryPageTest() {
-        MainMenu mainMenu = homePage.getMainMenu();
-        List<String> subCategoriesTitles = mainMenu.hoverOverNewInCategory().getSubCategoriesTitles();
-
+    @Test(description = "Go to subcategory page", dependsOnMethods = "displaySubMenuTest",
+            dataProvider = "New In submenu categories", dataProviderClass = DataProviders.class)
+    public void goToSubcategoryPageTest(String subcategory) {
+        NewInSubCatPage newInSubCatPage = homePage.getMainMenu().hoverOverNewInCategory().clickOnSubcategory(subcategory);
         SoftAssert soft = new SoftAssert();
-        for (String subCategoryTitle : subCategoriesTitles) {
-            NewInSubCatPage newInSubCatPage = mainMenu.hoverOverNewInCategory().clickOnSubcategory(subCategoryTitle);
-            soft.assertEquals(newInSubCatPage.getTitle(), subCategoryTitle, "Title on 'New In' subcategory page is different " +
-                    "than subcategory chosen from menu");
-            soft.assertEquals(newInSubCatPage.getSideBar().getActiveCategoryTitle(), subCategoryTitle, "Active category in " +
-                    "sidebar is different than subcategory chosen from menu");
-        }
+        soft.assertEquals(newInSubCatPage.getTitle(), subcategory, "Title on 'New In' subcategory page is different " +
+                "than subcategory chosen from menu");
+        soft.assertEquals(newInSubCatPage.getSideBar().getActiveCategoryTitle(), subcategory, "Active category in " +
+                "sidebar is different than subcategory chosen from menu");
         soft.assertAll();
     }
 }

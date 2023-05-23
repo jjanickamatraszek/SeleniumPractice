@@ -16,7 +16,8 @@ public class CookieDialog extends BasePage {
     }
 
     public void acceptCookies() {
-        wait.until(ExpectedConditions.visibilityOf(okBtn));
-        click(okBtn);
+        if (wait.until(ExpectedConditions.visibilityOf(okBtn)).isDisplayed()) {
+            click(okBtn);
+        }
     }
 }
