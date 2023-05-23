@@ -1,5 +1,6 @@
 package propertiesReader;
 
+import com.solvd.model.Product;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +17,9 @@ public class TestDataReader {
         return getProperty("newIn.categories").split(",");
     }
 
-    public static String getNewInProductTitle(){
-        return getProperty("newIn.productTitle");
+    public static Product getNewInProduct(){
+        String title = getProperty("newIn.product.title");
+        String dataId = getProperty("newIn.product.data-id");
+        return new Product(title, dataId);
     }
 }

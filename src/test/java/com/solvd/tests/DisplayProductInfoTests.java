@@ -1,45 +1,37 @@
 package com.solvd.tests;
 
+import com.solvd.model.Product;
 import com.solvd.pages.HomePage;
 import com.solvd.pages.ProductPage;
 import com.solvd.tests.base.BaseTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import propertiesReader.TestDataReader;
 
-import java.net.MalformedURLException;
-
 public class DisplayProductInfoTests extends BaseTest {
-    private HomePage homePage;
-    private ProductPage productPage;
     private String newInCategory;
-    private String productTitle;
+    private Product product;
 
     @BeforeClass
-    public void loadTestData(){
+    public void loadTestData() {
         newInCategory = TestDataReader.getNewInCategories()[0];
-        productTitle = TestDataReader.getNewInProductTitle();
-    }
-
-    @BeforeMethod
-    @Parameters("browserType")
-    public void driverSetup (String browserType) throws MalformedURLException {
-        super.driverSetup(browserType);
-        homePage = new HomePage(driver);
-        homePage.goToPage().getCookieDialog().acceptCookies();
-        productPage = homePage.getMainMenu()
-                .hoverOverNewInCategory()
-                .clickOnSubcategory(newInCategory)
-                .clickOnProductByTitle(productTitle);
+        product = TestDataReader.getNewInProduct();
     }
 
     @Test(description = "Display product page")
     public void displayProductInfoTest() {
+        String expectedProductTitle = product.getTitle();
+
+        HomePage homePage = new HomePage(driver);
+        homePage.goToPage().getCookieDialog().acceptCookies();
+        ProductPage productPage = homePage.getMainMenu()
+                .hoverOverNewInCategory()
+                .clickOnSubcategory(newInCategory)
+                .clickOnProduct(product);
+
         SoftAssert soft = new SoftAssert();
-        soft.assertEquals(productPage.getTitle(), productTitle, "Product title is different than expected");
+        soft.assertEquals(productPage.getTitle(), expectedProductTitle, "Product title is different than expected");
         soft.assertFalse(productPage.getPrice().isBlank(), "Product price is blank");
         soft.assertTrue(productPage.mainImageIsDisplayed(), "Product main image is not displayed");
         soft.assertTrue(productPage.isDescriptionExpanded(), "Product description section is not expanded after page launch");
@@ -54,6 +46,13 @@ public class DisplayProductInfoTests extends BaseTest {
 
     @Test(description = "Expand and collapse description section")
     public void expandAndCollapseDescTest() {
+        HomePage homePage = new HomePage(driver);
+        homePage.goToPage().getCookieDialog().acceptCookies();
+        ProductPage productPage = homePage.getMainMenu()
+                .hoverOverNewInCategory()
+                .clickOnSubcategory(newInCategory)
+                .clickOnProduct(product);
+
         ProductPage productPageWithCollapsedAllSections = productPage
                 .expandCollapseDescriptionSection();
 

@@ -5,30 +5,20 @@ import com.solvd.pages.NewInSubCatPage;
 import com.solvd.routes.Route;
 import com.solvd.tests.base.BaseTest;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class CategoryProductFiltersTests extends BaseTest {
-    private NewInSubCatPage categoryPage;
-
-    @BeforeMethod
-    @Parameters("browserType")
-    public void driverSetup(String browserType) throws MalformedURLException {
-        super.driverSetup(browserType);
-        categoryPage = new NewInSubCatPage(driver);
-        categoryPage.goToPage(Route.NEW_IN_WOMEN).getCookieDialog().acceptCookies();
-    }
 
     @Test(description = "Sort products by price asc")
     public void sortProductsByPriceAscTest() {
+        NewInSubCatPage categoryPage = new NewInSubCatPage(driver);
+        categoryPage.goToPage(Route.NEW_IN_WOMEN).getCookieDialog().acceptCookies();
         List<BigDecimal> expectedProductsPricesSorted = categoryPage
                 .getProductsPricesAsNumbers()
                 .stream()
@@ -51,6 +41,8 @@ public class CategoryProductFiltersTests extends BaseTest {
 
     @Test(description = "Sort products by default order")
     public void sortProductsByDefaultOrderTest() {
+        NewInSubCatPage categoryPage = new NewInSubCatPage(driver);
+        categoryPage.goToPage(Route.NEW_IN_WOMEN).getCookieDialog().acceptCookies();
         List<String> expectedProductsTitles = categoryPage.getProductsTitles();
 
         NewInSubCatPage categoryPageSortedByPrice = categoryPage
@@ -83,6 +75,8 @@ public class CategoryProductFiltersTests extends BaseTest {
 
     @Test(description = "Filter products by price range")
     public void filterProductsByPriceRangeTest() {
+        NewInSubCatPage categoryPage = new NewInSubCatPage(driver);
+        categoryPage.goToPage(Route.NEW_IN_WOMEN).getCookieDialog().acceptCookies();
         List<BigDecimal> productPricesSortedAsc = categoryPage
                 .getProductsPricesAsNumbers()
                 .stream()

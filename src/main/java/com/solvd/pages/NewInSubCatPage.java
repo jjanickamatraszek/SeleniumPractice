@@ -5,6 +5,7 @@ import com.solvd.components.CookieDialog;
 import com.solvd.components.MainMenu;
 import com.solvd.components.ProductFilters;
 import com.solvd.components.SideBar;
+import com.solvd.model.Product;
 import com.solvd.propertiesReader.ConfigReader;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -55,12 +56,10 @@ public class NewInSubCatPage extends BasePage {
         return getText(titleLabel);
     }
 
-    public ProductPage clickOnProductByTitle(String title) {
-        click(products
-                .stream()
-                .filter(element -> getText(element.findElement(By.tagName("h3"))).equalsIgnoreCase(title))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Product with title '%s' doesn't exist".formatted(title))));
+    public ProductPage clickOnProduct(Product product) {
+        String path = "#categoryProducts>article[data-id='%s']".replace("%s", product.getDataId());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(path)));
+        click(driver.findElement(By.cssSelector(path)));
         return new ProductPage(driver);
     }
 
