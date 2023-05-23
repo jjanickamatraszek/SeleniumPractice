@@ -19,6 +19,8 @@ public class NewInSubMenu extends BasePage {
     @FindBy(xpath = ".//span[contains(text(),'new in')]/parent::li//ul/div[contains(@class,'photo-section')]")
     private List<WebElement> subCategories;
 
+    private String subcategoryXPATH = ".//span[contains(text(),'new in')]/parent::li//div[text()='%s']";
+
     public NewInSubMenu(WebDriver driver) {
         super(driver);
     }
@@ -55,13 +57,15 @@ public class NewInSubMenu extends BasePage {
     }
 
     public NewInSubCatPage clickOnSubcategory(String title) {
-        WebElement subCategory = subCategories
-                .stream()
-                .filter(el -> getText(el.findElement(By.cssSelector("div[class*='Text']"))).equalsIgnoreCase(title))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("There's no subcategory with title '%s' in 'New In' category menu'".formatted(title)));
-
-        click(subCategory);
+        String path = subcategoryXPATH.replace("%s", title.toUpperCase());
+        click(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(path))));
+//        WebElement subCategory = subCategories
+//                .stream()
+//                .filter(el -> getText(el.findElement(By.cssSelector("div[class*='Text']"))).equalsIgnoreCase(title))
+//                .findFirst()
+//                .orElseThrow(() -> new IllegalArgumentException("There's no subcategory with title '%s' in 'New In' category menu'".formatted(title)));
+//
+//        click(subCategory);
         wait.until(ExpectedConditions.invisibilityOf(submenuContainer));
         return new NewInSubCatPage(driver);
     }

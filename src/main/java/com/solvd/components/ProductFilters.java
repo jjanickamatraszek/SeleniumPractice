@@ -40,7 +40,7 @@ public class ProductFilters extends BasePage {
 
     public NewInSubCatPage sortBy(SortOption sortOption) {
         click(sortByFilterLabel);
-        wait.until(ExpectedConditions.visibilityOfAllElements(sortOptions));
+        wait.until(ExpectedConditions.visibilityOfAllElements(sortBtn));
         WebElement chosenSortOption = sortOptions
                 .stream()
                 .filter(el -> el.findElement(By.cssSelector("input")).getAttribute("value").equals(sortOption.getValue()))

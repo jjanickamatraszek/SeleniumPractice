@@ -29,8 +29,8 @@ public class NewInSubMenuTests extends BaseTest {
         soft.assertAll();
     }
 
-    @Test(description = "Go to subcategory page", dependsOnMethods = "displaySubMenuTest",
-            dataProvider = "New In submenu categories", dataProviderClass = DataProviders.class, enabled = false)
+    @Test(description = "Go to subcategory page",
+            dataProvider = "New In submenu categories", dataProviderClass = DataProviders.class)
     public void goToSubcategoryPageTest(String subcategory) {
         HomePage homePage = new HomePage(driver);
         homePage.goToPage().getCookieDialog().acceptCookies();
