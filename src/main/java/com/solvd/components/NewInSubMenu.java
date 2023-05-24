@@ -59,13 +59,6 @@ public class NewInSubMenu extends BasePage {
     public NewInSubCatPage clickOnSubcategory(String title) {
         String path = subcategoryXPATH.replace("%s", title.toUpperCase());
         click(wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(path))));
-//        WebElement subCategory = subCategories
-//                .stream()
-//                .filter(el -> getText(el.findElement(By.cssSelector("div[class*='Text']"))).equalsIgnoreCase(title))
-//                .findFirst()
-//                .orElseThrow(() -> new IllegalArgumentException("There's no subcategory with title '%s' in 'New In' category menu'".formatted(title)));
-//
-//        click(subCategory);
         wait.until(ExpectedConditions.invisibilityOf(submenuContainer));
         return new NewInSubCatPage(driver);
     }
