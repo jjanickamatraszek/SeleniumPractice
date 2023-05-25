@@ -21,7 +21,7 @@ public abstract class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         PageFactory.initElements(driver, this);
     }
 
@@ -37,6 +37,17 @@ public abstract class BasePage {
         return isVisible;
     }
 
+    public boolean isElementDisplayed(WebElement element) {
+        boolean isDisplayed = true;
+        if (element.isDisplayed()) {
+            LOGGER.info("Element is displayed %s".formatted(Utils.extractSelector(element)));
+        } else {
+            isDisplayed = false;
+            LOGGER.info("Element isn't displayed %s".formatted(Utils.extractSelector(element)));
+        }
+        return isDisplayed;
+    }
+
     public void click(WebElement element) {
         element.click();
         LOGGER.info("Click element %s".formatted(Utils.extractSelector(element)));
@@ -46,5 +57,16 @@ public abstract class BasePage {
         Actions actions = new Actions(driver);
         actions.moveToElement(element).build().perform();
         LOGGER.info("Hover over element %s".formatted(Utils.extractSelector(element)));
+    }
+
+    public String getText(WebElement element) {
+        String text = element.getText().strip();
+        LOGGER.info("Get text of element %s. Text is '%s'".formatted(Utils.extractSelector(element), text));
+        return text;
+    }
+
+    public void sendText(WebElement element, String text) {
+        element.sendKeys(text);
+        LOGGER.info("Send text %s to element %s".formatted(text, Utils.extractSelector(element)));
     }
 }
